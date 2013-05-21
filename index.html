@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Muwo</title>
+<meta charset="utf-8">
+<meta property="og:image" content="screenshot.png"/>
+<style>
+h1 {
+    text-align: center;
+    font-weight: normal;
+    letter-spacing: 2px;
+    color: #fafafa;
+    font-size: 60px;
+    margin: 40px 0 20px;
+    font-family: Helvetica, sans-serif;
+    text-shadow: 0 -1px 1px #fff, 0 0 6px rgba(0, 0, 0, 0.15), 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+.help {
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    color: #e31;
+    font-size: 16px;
+    margin: 20px;
+    letter-spacing: 1px;
+}
+
+.help a {
+    color: #e31;
+    text-decoration: none;
+}
+
+.muwo {
+    margin: 20px auto;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    overflow: hidden;
+    border-radius: 2px;
+    width: 599px;
+    height: 299px;
+}
+
+.g {
+    border-bottom: 1px dashed #f4f4f4;
+    border-right: 1px dashed #f4f4f4;
+    background: #fff;
+}
+
+.s,
+.s.entering:before {
+    margin: 4px 0 0 3px;
+    border-top-left-radius: 10.5px 10.5px;
+    border-top-right-radius: 15.5px 10.5px;
+    border-bottom-right-radius: 15.5px 10.5px;
+    border-bottom-left-radius: 10.5px 10.5px;
+    background: -webkit-radial-gradient(100% 50%, 95% 65%, #fff, #fff 50%, #f8f8f8);
+    background: radial-gradient(95% 65% at 100% 50%, #fff, #fff 50%, #f8f8f8);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.h {
+    background: #ccc;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 100%;
+    background-clip: padding-box;
+    margin: 0 0 0 0;
+}
+
+.h.closable {
+    border: 1px solid #fff;
+    margin: -1px 0 0 -1px;
+    -webkit-animation: 1s linear blueglow infinite alternate;
+    -moz-animation: 1s linear blueglow infinite alternate;
+}
+
+@-webkit-keyframes blueglow {
+    0% { box-shadow: 0 0 10px #1ebbe8, inset 0 0 0 0 #fff, inset 0 0 8px 2px rgba(0, 0, 0, 0.4); }
+    100% { box-shadow: 0 0 2px #1ebbe8, inset 0 0 0 0 #fff, inset 0 0 8px 2px rgba(0, 0, 0, 0.4); }
+}
+
+@-moz-keyframes blueglow {
+    0% { box-shadow: 0 0 10px #1ebbe8, inset 0 0 0 0 #fff, inset 0 0 8px 2px rgba(0, 0, 0, 0.4); }
+    100% { box-shadow: 0 0 2px #1ebbe8, inset 0 0 0 0 #fff, inset 0 0 8px 2px rgba(0, 0, 0, 0.4); }
+}
+
+.h::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-top: 14px;
+    margin-left: 14px;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    transition: 0.2s all ease-in;
+}
+
+.h.closed::before {
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 31px;
+    height: 31px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.0);
+    transition: 0.2s all ease-out;
+}
+
+.p {
+    background: repeating-linear-gradient(45deg, #1ebbe8, #1ebbe8 2.8px, transparent 2.8px, transparent 5.6px);
+    box-shadow: inset 0 0 5px 3px #fff;
+}
+
+.d,
+.d.entering::before {
+    margin: 7px 0 0 7px;
+    border-radius: 100%;
+    background: #f64;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+.goal {
+    margin: 1px 0 0 1px;
+    border-radius: 100%;
+    border: 2px dashed #f86;
+    -webkit-animation: 10s linear rotating infinite;
+    -moz-animation: 10s linear rotating infinite;
+}
+
+@-webkit-keyframes rotating {
+    0% { -webkit-transform: rotate(0deg) }
+    100% { -webkit-transform: rotate(360deg) }
+}
+
+@-moz-keyframes rotating {
+    0% { -moz-transform: rotate(0deg) }
+    100% { -moz-transform: rotate(360deg) }
+}
+
+.g, .s, .h, .d, .goal, .p {
+    position: absolute;
+    transition: 0.21s all linear;
+}
+
+.s, .h, .goal, .p {
+    z-index: 2;
+}
+
+.d {
+    z-index: 3;
+}
+
+.o0.entering { -webkit-animation: 0.2s linear entering0; }
+
+.o0.entering { -moz-animation: 0.2s linear entering0; }
+
+.o1.entering { -webkit-animation: 0.2s linear entering1; }
+
+.o1.entering { -moz-animation: 0.2s linear entering1; }
+
+.o2.entering { -webkit-animation: 0.2s linear entering2; }
+
+.o2.entering { -moz-animation: 0.2s linear entering2; }
+
+.o3.entering { -webkit-animation: 0.2s linear entering3; }
+
+.o3.entering { -moz-animation: 0.2s linear entering3; }
+
+@-webkit-keyframes entering0 {
+    0% { margin-top: 34px; }
+    100% { margin-top: 4px; }
+}
+
+@-moz-keyframes entering0 {
+    0% { margin-top: 34px; }
+    100% { margin-top: 4px; }
+}
+
+@-webkit-keyframes entering1 {
+    0% { margin-left: -27px; }
+    100% { margin-left: 3px; }
+}
+
+@-moz-keyframes entering1 {
+    0% { margin-left: -27px; }
+    100% { margin-left: 3px; }
+}
+
+@-webkit-keyframes entering2 {
+    0% { margin-top: -26px; }
+    100% { margin-top: 4px; }
+}
+
+@-moz-keyframes entering2 {
+    0% { margin-top: -26px; }
+    100% { margin-top: 4px; }
+}
+
+@-webkit-keyframes entering3 {
+    0% { margin-left: 33px; }
+    100% { margin-left: 3px; }
+}
+
+@-moz-keyframes entering3 {
+    0% { margin-left: 33px; }
+    100% { margin-left: 3px; }
+}
+
+.entering {
+    -moz-transition: none;
+    transition: none;
+}
+
+.entering::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    margin: 0 0 0 0;
+}
+
+.entering.o0::before,
+.entering.o2::before {
+    margin-left: 300px;
+}
+
+.entering.o1::before,
+.entering.o3::before {
+    margin-left: 600px;
+}
+
+.o0 { -webkit-transform: rotate(-90deg); }
+
+.o0 { -moz-transform: rotate(-90deg); }
+
+.o1 { -webkit-transform: rotate(0deg); }
+
+.o1 { -moz-transform: rotate(0deg); }
+
+.o2 { -webkit-transform: rotate(90deg); }
+
+.o2 { -moz-transform: rotate(90deg); }
+
+.o3 { -webkit-transform: rotate(180deg); }
+
+.o3 { -moz-transform: rotate(180deg); }
+
+.s.falling,
+.d.falling {
+    width: 0;
+    height: 0;
+    margin-left: 15px;
+    margin-top: 15px;
+    opacity: 0;
+    -moz-transition: 1s all ease-out;
+    transition: 1s all ease-out;
+}
+
+.game_over {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    color: #fff;
+    text-shadow: none;
+    line-height: 300px;
+    text-align: center;
+    font-size: 80px;
+    font-family: Helvetica, sans-serif;
+    z-index: 5;
+    -moz-transition: 0.5s opacity ease-in;
+    transition: 0.5s opacity ease-in, 1.5s all ease-in;
+    cursor: default;
+}
+
+.lose .game_over {
+    opacity: 1;
+    color: #f8f8f8;
+    text-shadow: 0 -1px 1px #fff, 0 2px 20px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.game_shim {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15), inset 0 0 20px rgba(0, 0, 0, 0.07);
+    z-index: 4;
+    border-radius: 2px;
+}
+
+.victory {
+    display: block;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 300px;
+    text-align: center;
+    font-size: 60px;
+    font-family: Helvetica, sans-serif;
+    z-index: 4;
+    text-shadow: none;
+    color: #f53;
+    background: -webkit-radial-gradient(10% 10%, 150% 150%, #f74, #e00);
+    background: radial-gradient(150% 150% at 10% 10%, #f74, #e00);
+    -moz-transition: 0.5s opacity ease-in;
+    transition: 0.5s opacity ease-in, 1s all ease-in;
+    border-radius: 2px;
+    cursor: default;
+}
+
+.win .victory {
+    opacity: 1;
+    text-shadow: 0 -1px 1px #f86, 0 2px 20px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.win .s,
+.win .h {
+    opacity: 0;
+    -moz-transition: 0.5s all ease-out;
+    transition: 0.5s all ease-out;
+}
+
+.hud {
+    position: absolute;
+    z-index: 4;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 1px;
+    font-family: Helvetica, sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    line-height: 30px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.hud .over {
+    color: #f53;
+}
+
+.connector {
+    position: absolute;
+    border: 2px dashed #1ebbe8;
+    z-index: 1;
+    opacity: 0.5;
+    display: none;
+}
+
+.level_01 .connector.lv_1,
+.level_02 .connector.lv_2,
+.level_03 .connector.lv_3,
+.level_04 .connector.lv_4,
+.level_05 .connector.lv_5,
+.level_06 .connector.lv_6,
+.level_07 .connector.lv_7,
+.level_08 .connector.lv_8,
+.level_09 .connector.lv_9 {
+    display: block;
+}
+
+.co_3_1 {
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    top: 149px;
+    left: 284px;
+    width: 118px;
+    height: 15px;
+}
+
+.co_4_1 {
+    border-radius: 0 5px 0 0;
+    border-bottom: none;
+    border-left: none;
+    top: 73px;
+    left: 325px;
+    width: 48px;
+    height: 43px;
+}
+
+.co_4_2 {
+    border-radius: 0 0 5px 0;
+    border-top: none;
+    border-left: none;
+    top: 150px;
+    left: 325px;
+    width: 109px;
+    height: 44px;
+}
+
+.co_8_1 {
+    border-radius: 5px 0 0 0;
+    border-bottom: none;
+    border-right: none;
+    top: 104px;
+    left: 224px;
+    width: 168px;
+    height: 133px;
+}
+
+.co_8_2_1 {
+    border-radius: 5px 0 0 0;
+    border-bottom: none;
+    border-right: none;
+    top: 163px;
+    left: 255px;
+    width: 131px;
+    height: 74px;
+}
+
+.co_8_2_2 {
+    border-radius: 0 0 0 5px;
+    border-top: none;
+    border-right: none;
+    top: 237px;
+    left: 255px;
+    width: 17px;
+    height: 16px;
+}
+
+.co_9_1 {
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    top: 74px;
+    left: 74px;
+    width: 267px;
+    height: 12px;
+}
+
+.co_9_2 {
+    border-radius: 0 0 5px 0;
+    border-top: none;
+    border-left: none;
+    top: 120px;
+    left: 265px;
+    width: 18px;
+    height: 104px;
+}
+
+.co_9_3_1 {
+    border-radius: 0 0 0 5px;
+    border-top: none;
+    border-right: none;
+    top: 104px;
+    left: 104px;
+    width: 195px;
+    height: 60px;
+}
+
+.co_9_3_2 {
+    border-radius: 0 0 5px 0;
+    border-top: none;
+    border-left: none;
+    top: 149px;
+    left: 306px;
+    width: 188px;
+    height: 15px;
+}
+
+</style>
+</head>
+<body>
+<h1>MUWO</h1>
+
+<div id="muwo" class="muwo">
+    <div class="connector lv_3 co_3_1"></div>
+    <div class="connector lv_4 co_4_1"></div>
+    <div class="connector lv_4 co_4_2"></div>
+    <div class="connector lv_8 co_8_1"></div>
+    <div class="connector lv_8 co_8_2_1"></div>
+    <div class="connector lv_8 co_8_2_2"></div>
+    <div class="connector lv_9 co_9_1"></div>
+    <div class="connector lv_9 co_9_2"></div>
+    <div class="connector lv_9 co_9_3_1"></div>
+    <div class="connector lv_9 co_9_3_2"></div>
+    <div class="hud"></div>
+    <div class="victory">OK</div>
+    <div class="game_shim"></div>
+    <div class="game_over">INCORRECT</div>
+</div>
+<div class="help"><a href="http://www.ludumdare.com/compo/ludum-dare-26/?action=preview&uid=5209">ludum_dare_26</a><br />left_click // right_click // space<br/>
+    chrome : ++ // firefox : ~~ // others : ??
+</div>
+<script type="text/javascript" src="libs/waapisim.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    var columns = 20;
+    var rows = 10;
+    var cell_size = 30;
+    var game = $('#muwo');
+    var css = ' .muwo {width:' + (cell_size * columns - 1) + 'px;height:' + (cell_size * rows - 1) + 'px}';
+    css += ' .g {width:' + (cell_size - 1) + 'px;height:' + (cell_size - 1) + 'px}';
+    css += ' .s,.s::before {width:' + (cell_size - 4) + 'px;height:' + (cell_size - 9) + 'px;}';
+    css += ' .h {width:' + (cell_size - 1) + 'px;height:' + (cell_size - 1) + 'px;}';
+    css += ' .p {width:' + (cell_size - 1) + 'px;height:' + (cell_size - 1) + 'px;}';
+    css += ' .d,.d::before {width:' + (cell_size - 15) + 'px;height:' + (cell_size - 15) + 'px;}';
+    css += ' .goal {width:' + (cell_size - 7) + 'px;height:' + (cell_size - 7) + 'px;}';
+    css += ' .g.c' + (columns - 1) + '{border-right:0}';
+    css += ' .g.r' + (rows - 1) + '{border-bottom:0}';
+    for (var y = 1; y < rows; ++y)
+        css += ' .r' + y + ' {top:' + (cell_size * y) + 'px}';
+    for (var x = 1; x < columns; ++x)
+        css += ' .c' + x + '{left:' + (cell_size * x) + 'px}';
+    $(document.body).append($('<style>' + css + '</style>'))
+    for (y = 0; y < rows; ++y) {
+        for (x = 0; x < columns; ++x) {
+            game.append($('<div class="g c' + x + ' r' + y + '"></div>'));
+        }
+    }
+
+    game.on('contextmenu', function () {
+        return false;
+    });
+    game.on('mousedown', function (event) {
+        switch (ticker.state) {
+            case 'designing':
+                var position = game.offset();
+                var x = event.pageX - position.left;
+                var y = event.pageY - position.top;
+                var row = Math.floor(y / cell_size);
+                var column = Math.floor(x / cell_size);
+                var agent = ticker.get_agent_at([row, column], null);
+                if (agent) {
+                    if (agent.type == 's') {
+                        playSound('click');
+                        switch (event.which) {
+                            case 1:
+                                var old_orientation = agent.orientation;
+                                agent.orientation = (agent.orientation + 1) % 4;
+                                agent.view.removeClass('o' + old_orientation).addClass('o' + agent.orientation);
+                                break;
+                            case 2:
+                            case 3:
+                                ticker.agents.splice(ticker.agents.indexOf(agent), 1);
+                                agent.view.remove();
+                                ticker.ships_count -= 1;
+                                $('.hud').html(ticker.current_level.name + ' /<span class="' +
+                                        (ticker.ships_count > ticker.current_level.par ? 'over' : '') + '">/ par_0' +
+                                        ticker.current_level.par + '</span>\xa0\xa0');
+                                break;
+                        }
+                    }
+                } else {
+                    if (event.which == 1) {
+                        playSound('click');
+                        make_agent('s', row, column, 1);
+                    }
+                }
+                break;
+            case 'game_over':
+                reload_level();
+                break;
+            case 'victory':
+                next_level();
+                break;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    function reload_level() {
+        ticker.state = 'designing';
+        load_level(ticker.current_level);
+        for (i = 0; i < user_items.length; ++i)
+            make_agent.apply(null, user_items[i]);
+        clearInterval(intervalHandle);
+        game.removeClass('lose');
+    }
+
+    function next_level() {
+        ticker.state = 'designing';
+        load_level(ticker.current_level.next_level);
+        game.removeClass('win');
+    }
+
+    var intervalHandle = null;
+    var user_items = [];
+    $(document.body).on('keypress', function (event) {
+        if (event.which == 32) {
+            switch (ticker.state) {
+                case 'designing':
+                    user_items = [];
+                    for (var i = 0; i < ticker.agents.length; ++i) {
+                        var agent = ticker.agents[i];
+                        if (agent.type == 's')
+                            user_items.push(['s', agent.row, agent.column, agent.orientation]);
+                    }
+                    if (user_items.length > 0) {
+                        ticker.state = 'playing';
+                        ticker.agents.sort(function (a, b) {
+                            if (a.type == 'd') return 1;
+                            if (b.type == 'd') return -1;
+                            return 0;
+                        });
+                        intervalHandle = setInterval(ticker.tick.bind(ticker), 200);
+                        ticker.tick();
+                    }
+                    break;
+                case 'playing':
+                case 'game_over':
+                    reload_level();
+                    break;
+                case 'victory':
+                    next_level();
+                    break;
+            }
+        }
+    });
+
+    var ticker = {
+        state: 'designing',
+        agents: [],
+        ships_count: 0,
+        tick: function () {
+            if (game.hasClass('win') || game.hasClass('lose'))
+                return;
+            for (var i = 0; i < this.agents.length; ++i)
+                this.agents[i].tick();
+            for (i = 0; i < this.agents.length; ++i)
+                this.agents[i].decide();
+            var resolution_has_progressed = true;
+            while (resolution_has_progressed) {
+                resolution_has_progressed = false;
+                for (i = 0; i < this.agents.length; ++i)
+                    resolution_has_progressed |= this.agents[i].resolve();
+            }
+            for (i = 0; i < this.agents.length; ++i)
+                this.agents[i].finalize_resolve();
+
+            var has_anyone_alive = false;
+            for (i = 0; i < this.agents.length; ++i)
+                if (this.agents[i].type == 's' && !this.agents[i].is_falling)
+                    has_anyone_alive = true;
+            if (!has_anyone_alive) {
+                ticker.state = 'game_over';
+                game.addClass('lose');
+                clearInterval(intervalHandle);
+            }
+        },
+        get_agent_at: function (coordinates, type) {
+            var row = coordinates[0];
+            var column = coordinates[1];
+            // Wrap coordinates before use
+            row = (row + rows) % rows;
+            column = (column + columns) % columns;
+            var agent = null;
+            for (var i = 0; i < this.agents.length; ++i)
+                // Only return ships for now
+                if ((type == null || this.agents[i].type == type) && this.agents[i].row == row && this.agents[i].column == column && !this.agents[i].is_falling)
+                    agent = this.agents[i];
+            return agent;
+        }
+    };
+
+    function get_relative_coordinates(row, column, orientation, moves_forward, moves_left) {
+        switch (orientation) {
+            case 0:
+                row -= moves_forward;
+                column -= moves_left;
+                break;
+            case 1:
+                row -= moves_left;
+                column += moves_forward;
+                break;
+            case 2:
+                row += moves_forward;
+                column += moves_left;
+                break;
+            case 3:
+                row += moves_left;
+                column -= moves_forward;
+                break;
+        }
+        return [(row + rows) % rows, (column + columns) % columns];
+    }
+
+    function have_opposite_orientations(a, b) {
+        return (a.orientation == 0 && b.orientation == 2) ||
+                (a.orientation == 2 && b.orientation == 0) ||
+                (a.orientation == 1 && b.orientation == 3) ||
+                (a.orientation == 3 && b.orientation == 1);
+    }
+
+    function make_agent(type, row, column, orientation) {
+        if (type == 's') {
+            ticker.ships_count += 1;
+            $('.hud').html(ticker.current_level.name + ' /<span class="' +
+                    (ticker.ships_count > ticker.current_level.par ? 'over' : '') + '">/ par_0' +
+                    ticker.current_level.par + '</span>\xa0\xa0');
+        }
+
+        var agent = {
+            view: $('<div></div>').addClass(type),
+            row: row,
+            column: column,
+            type: type,
+            orientation: orientation,
+            decision: 'none',
+            is_falling: false,
+            is_doing_the_love_dance: false,
+            is_closed: false,
+            get_relative_coordinates: function (moves_forward, moves_left) {
+                return get_relative_coordinates(this.row, this.column, this.orientation, moves_forward, moves_left);
+            },
+            tick: function () {
+                if (this.is_falling)
+                    return;
+                var old_row = this.row;
+                var old_column = this.column;
+                var old_orientation = this.orientation;
+
+                if (type == 'h') {
+                    this.view.toggleClass('closed', this.is_closed);
+                }
+                if (type == 's') {
+                    var hole = ticker.get_agent_at([this.row, this.column], 'h');
+                    if (hole && !hole.is_closed) {
+                        this.is_falling = true;
+                        this.view.addClass('falling');
+                        playSound('fall');
+                        return;
+                    }
+                    var dot = ticker.get_agent_at([this.row, this.column], 'd');
+                    if (dot) {
+                        if (!dot.ship)
+                            playSound('pickup');
+                        dot.ship = this;
+                    }
+                    var pad = ticker.get_agent_at([this.row, this.column], 'p');
+                    if (pad && pad.hole && this.decision == 'forward') {
+                        if (pad.hole.is_closed)
+                            playSound('open');
+                        else
+                            setTimeout(function () {
+                                playSound('close');
+                            }, 200);
+                        pad.hole.is_closed = !pad.hole.is_closed;
+                    }
+                    switch (this.decision) {
+                        case 'forward':
+                            switch (this.orientation) {
+                                case 0:
+                                    this.row = (this.row + rows - 1) % rows;
+                                    break;
+                                case 1:
+                                    this.column = (this.column + 1) % columns;
+                                    break;
+                                case 2:
+                                    this.row = (this.row + 1) % rows;
+                                    break;
+                                case 3:
+                                    this.column = (this.column + columns - 1) % columns;
+                                    break;
+                            }
+                            break;
+                        case 'left':
+                            this.orientation = (this.orientation + 3) % 4;
+                            break;
+                        case 'right':
+                            this.orientation = (this.orientation + 1) % 4;
+                            break;
+                    }
+                } else if (type == 'd') {
+                    var goal = ticker.get_agent_at([this.row, this.column], 'goal');
+                    if (goal) {
+                        ticker.state = 'victory';
+                        if (ticker.current_level.par < user_items.length)
+                            $('.victory').text('OK');
+                        else if (ticker.current_level.par == user_items.length)
+                            $('.victory').text('GOOD');
+                        else
+                            $('.victory').text('EXCELLENT');
+                        clearInterval(intervalHandle);
+                        game.addClass('win');
+                        playSound('victory');
+                        this.ship = null;
+                    }
+                    if (this.ship) {
+                        this.row = this.ship.row;
+                        this.column = this.ship.column;
+                        this.orientation = this.ship.orientation;
+                        if (this.ship.is_falling) {
+                            this.is_falling = true;
+                            this.view.addClass('falling');
+                            ticker.state = 'game_over';
+                            clearInterval(intervalHandle);
+                            game.addClass('lose');
+                        }
+                    }
+                }
+
+                if (
+                        (this.row == 0 && old_row == rows - 1) ||
+                                (this.row == rows - 1 && old_row == 0) ||
+                                (this.column == 0 && old_column == columns - 1) ||
+                                (this.column == columns - 1 && old_column == 0)
+                        ) {
+                    this.view.addClass('entering');
+                } else {
+                    this.view.removeClass('entering');
+                }
+
+                this.view.removeClass('r' + old_row + ' c' + old_column + ' o' + old_orientation).addClass('r' + this.row + ' c' + this.column + ' o' + this.orientation);
+
+            },
+            decide: function () {
+                if (type == 's') {
+                    if (this.is_falling) {
+                        this.decision = 'dead';
+                        return;
+                    }
+                    var agent_in_front = ticker.get_agent_at(this.get_relative_coordinates(1, 0), 's');
+                    var agent_in_front_front = ticker.get_agent_at(this.get_relative_coordinates(2, 0), 's');
+                    var agent_in_front_left = ticker.get_agent_at(this.get_relative_coordinates(1, 1), 's');
+                    var agent_in_front_right = ticker.get_agent_at(this.get_relative_coordinates(1, -1), 's');
+                    var agent_in_back_left = ticker.get_agent_at(this.get_relative_coordinates(-1, 1), 's');
+                    var agent_in_back_right = ticker.get_agent_at(this.get_relative_coordinates(-1, -1), 's');
+
+                    var preferred_decision = 'forward';
+                    if (agent_in_back_left && !agent_in_back_right && have_opposite_orientations(this, agent_in_back_left))
+                        preferred_decision = 'dancing_left';
+                    else if (agent_in_back_right && !agent_in_back_left && have_opposite_orientations(this, agent_in_back_right))
+                        preferred_decision = 'dancing_right';
+
+                    if (preferred_decision == 'dancing_left' || preferred_decision == 'dancing_right') {
+                        if (this.is_doing_the_love_dance) {
+                            playSound('dance');
+                            preferred_decision = 'forward';
+                            this.is_doing_the_love_dance = false;
+                        } else {
+                            this.is_doing_the_love_dance = true;
+                            preferred_decision = preferred_decision.split('_')[1];
+                        }
+                    }
+
+                    var is_forward_forbidden = false;
+                    this.forward_dependancy = null;
+                    if (agent_in_front_front && have_opposite_orientations(this, agent_in_front_front))
+                        is_forward_forbidden = true;
+                    if (agent_in_front) {
+                        if (this.orientation != agent_in_front.orientation)
+                            is_forward_forbidden = true;
+                        else
+                            this.forward_dependancy = agent_in_front;
+                    }
+                    if (agent_in_front_left && (
+                            (this.orientation == 0 && agent_in_front_left.orientation == 1) ||
+                                    (this.orientation == 1 && agent_in_front_left.orientation == 2) ||
+                                    (this.orientation == 2 && agent_in_front_left.orientation == 3) ||
+                                    (this.orientation == 3 && agent_in_front_left.orientation == 0)))
+                        is_forward_forbidden = true;
+                    if (agent_in_front_right && (
+                            (this.orientation == 0 && agent_in_front_right.orientation == 3) ||
+                                    (this.orientation == 1 && agent_in_front_right.orientation == 0) ||
+                                    (this.orientation == 2 && agent_in_front_right.orientation == 1) ||
+                                    (this.orientation == 3 && agent_in_front_right.orientation == 2)))
+                        is_forward_forbidden = true;
+
+                    if (preferred_decision == 'forward' && is_forward_forbidden)
+                        this.decision = 'left';
+                    else
+                        this.decision = preferred_decision;
+                }
+            },
+            resolve: function () {
+                // Return true iif is progress has been made
+                if (this.type == 's') {
+                    if (this.decision == 'forward' && this.forward_dependancy != null) {
+                        if (this.forward_dependancy.forward_dependancy == null) {
+                            if (this.forward_dependancy.decision != 'forward')
+                                this.decision = 'left';
+                            this.forward_dependancy = null;
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            },
+            finalize_resolve: function () {
+                if (this.type == 's') {
+                    if (this.forward_dependancy)
+                        this.decision = 'left';
+                }
+            }
+        };
+
+        game.append(agent.view);
+        ticker.agents.push(agent);
+        agent.view.addClass('r' + agent.row + ' c' + agent.column + ' o' + agent.orientation);
+        return agent;
+    }
+
+    function load_level(level) {
+        if (ticker.current_level)
+            game.removeClass(ticker.current_level.name);
+        ticker.current_level = level;
+        game.addClass(ticker.current_level.name);
+        ticker.ships_count = 0;
+        $('.hud').html(ticker.current_level.name + ' /<span class="' +
+                (ticker.ships_count > ticker.current_level.par ? 'over' : '') + '">/ par_0' +
+                ticker.current_level.par + '</span>\xa0\xa0');
+        ticker.state = 'designing';
+        ticker.agents = [];
+        game.children('.p , .h , .s , .d , .goal').remove();
+        var previous_agent = null;
+        for (var i = 0; i < level.items.length; ++i) {
+            var agent = make_agent.apply(this, level.items[i]);
+            if (agent.type == 'p' && previous_agent.type == 'h') {
+                agent.hole = previous_agent;
+                previous_agent.view.addClass('closable');
+            }
+            previous_agent = agent;
+        }
+    }
+
+    var level_01 = {
+        name: 'level_01',
+        par: 1,
+        items: [
+            ['d', 4, 5, 0],
+            ['goal', 4, 15, 0]
+        ]
+    };
+    var level_02 = {
+        name: 'level_02',
+        par: 1,
+        items: [
+            ['d', 4, 5, 0],
+            ['h', 3, 14, 0],
+            ['h', 4, 13, 0],
+            ['h', 5, 14, 0],
+            ['goal', 4, 15, 0]
+        ]
+    };
+    var level_03 = {
+        name: 'level_03',
+        par: 1,
+        items: [
+            ['d', 4, 5, 0],
+            ['h', 4, 13, 0],
+            ['p', 4, 9, 0],
+            ['h', 3, 14, 0],
+            ['h', 4, 15, 0],
+            ['h', 5, 14, 0],
+            ['goal', 4, 14, 0]
+        ]
+    };
+    var level_04 = {
+        name: 'level_04',
+        par: 2,
+        items: [
+            ['d', 4, 5, 0],
+            ['h', 4, 12, 0],
+            ['p', 2, 10, 0],
+            ['h', 4, 14, 0],
+            ['p', 6, 10, 0],
+            ['h', 3, 15, 0],
+            ['h', 4, 16, 0],
+            ['h', 5, 15, 0],
+            ['goal', 4, 15, 0]
+        ]
+    };
+    var level_05 = {
+        name: 'level_05',
+        par: 2,
+        items: [
+            ['d', 4, 11, 0],
+            ['h', 4, 13, 0],
+            ['h', 3, 11, 0],
+            ['h', 5, 11, 0],
+            ['h', 4, 8, 0],
+            ['h', 5, 6, 0],
+            ['h', 6, 8, 0],
+            ['goal', 8, 9, 0]
+        ]
+    };
+    var level_06 = {
+        name: 'level_06',
+        par: 2,
+        items: [
+            ['d', 4, 11, 0],
+            ['h', 4, 13, 0],
+            ['h', 3, 11, 0],
+            ['h', 5, 11, 0],
+            ['h', 4, 8, 0],
+            ['h', 5, 6, 0],
+            ['h', 6, 8, 0],
+            ['goal', 4, 15, 0]
+        ]
+    };
+    var level_07 = {
+        name: 'level_07',
+        par: 3,
+        items: [
+            ['h', 3, 4, 0],
+            ['h', 7, 8, 0],
+            ['h', 3, 12, 0],
+            ['h', 7, 16, 0],
+            ['d', 3, 8, 0],
+            ['goal', 7, 12, 0]
+        ]
+    };
+    var level_08 = {
+        name: 'level_08',
+        par: 3,
+        items: [
+            ['h', 3, 13, 0],
+            ['p', 8, 9, 0],
+            ['goal', 2, 13, 0],
+            ['d', 6, 13, 0],
+            ['h', 5, 13, 0],
+            ['p', 8, 7, 0],
+            ['h', 7, 13, 0],
+            ['h', 7, 9, 0],
+            ['h', 8, 10, 0],
+            ['h', 8, 6, 0]
+        ]
+    };
+    var level_09 = {
+        name: 'level_09',
+        par: 2,
+        items: [
+            ['h', 3, 11, 0],
+            ['p', 3, 2, 0],
+            ['h', 4, 14, 0],
+            ['h', 3, 3, 0],
+            ['p', 4, 16, 0],
+            ['h', 3, 9, 0],
+            ['p', 7, 8, 0],
+            ['goal', 3, 13, 0],
+            ['d', 3, 7, 0]
+        ]};
+    var the_end = {
+        name: 'the_end',
+        par: 0,
+        items: []
+    };
+
+    level_01.next_level = level_02;
+    level_02.next_level = level_03;
+    level_03.next_level = level_04;
+    level_04.next_level = level_05;
+    level_05.next_level = level_06;
+    level_06.next_level = level_07;
+    level_07.next_level = level_08;
+    level_08.next_level = level_09;
+    level_09.next_level = the_end;
+
+    var sounds = {};
+    var audioContext = null;
+
+    function playSound(name) {
+        if (audioContext && name in sounds) {
+            var source = audioContext.createBufferSource();
+            source.buffer = sounds[name];
+            source.connect(audioContext.destination);
+            source.noteOn(0);
+        }
+    }
+
+    if (window.AudioContext || window.webkitAudioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function loadSound(url, name) {
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.responseType = 'arraybuffer';
+            request.onload = function () {
+                audioContext.decodeAudioData(request.response, function (buffer) {
+                    sounds[name] = buffer;
+                    if (name == 'start')
+                        playSound('start');
+                }, function () {
+                    if (window.console && console.log)
+                        console.log(arguments);
+                });
+            };
+            request.send();
+        }
+
+        loadSound('dance.wav', 'dance');
+        loadSound('fall_3.wav', 'fall');
+        loadSound('click.wav', 'pickup');
+        loadSound('open.wav', 'open');
+        loadSound('close.wav', 'close');
+        loadSound('victory.wav', 'victory');
+    }
+
+    load_level(level_01);
+
+});
+</script>
+</body>
+</html>
