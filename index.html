@@ -1066,7 +1066,10 @@ $(document).ready(function () {
             var source = audioContext.createBufferSource();
             source.buffer = sounds[name];
             source.connect(audioContext.destination);
-            source.noteOn(0);
+            if (source.start)
+                source.start(0);
+            else
+                source.noteOn(0);
         }
     }
 
